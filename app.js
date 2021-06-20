@@ -1,11 +1,11 @@
-const express = require('express');
+const express = require("express");
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hola Mundo!');
+app.get("/", (req, res) => {
+  res.send("Hola Mundo!");
 });
 
-app.listen(3000, () => {
-  console.log('Aplicación ejemplo, escuchando el puerto 3000!');
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Gello Habits sample endpoint, listening port 3000");
 });
