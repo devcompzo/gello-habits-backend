@@ -1,0 +1,29 @@
+{
+  "name": "gello-habits-backend",
+  "version": "1.0.0",
+  "description": "Gello Habits Project - Backend Code",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devcompzo/gello-habits-backend.git"
+  },
+  "author": "DEVCOMPZO",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devcompzo/gello-habits-backend/issues"
+  },
+  "homepage": "https://github.com/devcompzo/gello-habits-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4"
+  }
+}
