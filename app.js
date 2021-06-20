@@ -1,11 +1,20 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const apiRoutes = require('./router/router');
 
 const errorController = require('./controller/errorController');
+const notificationsController = require('./controller/pushNotification');
 
-const app = express();
 const db = require("./database");
+const app = express();
+
+app.use(cors());
+app.use(bodyParser.json());
 
 db.authenticate()
   .then(() => {
@@ -24,6 +33,10 @@ app.get('/ping', (req, res) => {
 app.get('/', (req, res) => {
   res.send('Hola Mundo!');
 });
+
+app.post('/save-subscription', notificationsController.saveSubscription);
+
+app.post('/send-notification', notificationsController.sendNotification);
 
 app.get(errorController);
 
