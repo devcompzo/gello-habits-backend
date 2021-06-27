@@ -10,7 +10,7 @@ const apiRoutes = require('./router/router');
 const errorController = require('./controller/errorController');
 const notificationsController = require('./controller/pushNotification');
 
-const db = require("./database");
+const { sequelize: db } = require("./database");
 const app = express();
 
 app.use(cors());
