@@ -6,18 +6,6 @@ module.exports = (sequelize, Sequelize) => {
     eye: {
       type: Sequelize.INTEGER,
     },
-    neck: {
-      type: Sequelize.INTEGER,
-    },
-    head: {
-      type: Sequelize.INTEGER,
-    },
-    hand: {
-      type: Sequelize.INTEGER,
-    },
-    hoodie: {
-      type: Sequelize.INTEGER,
-    },
   });
 
   return Character;

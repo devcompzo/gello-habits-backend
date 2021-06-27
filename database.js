@@ -1,5 +1,6 @@
 const { Sequelize } = require('sequelize');
 const dotenv = require('dotenv');
+const relations = require('./model/relations');
 
 dotenv.config();
 
@@ -39,18 +40,6 @@ db.level = require('./model/level')(sequelize, Sequelize);
 db.priorityReward = require('./model/priorityReward')(sequelize, Sequelize);
 db.user = require('./model/user')(sequelize, Sequelize);
 
-const addRelations = (dbInstance) => {
-  const { habit } = dbInstance;
-  const { habitLog } = dbInstance;
-  // Improve relations structure in another file...
-  habit.hasMany(habitLog, { foreignKey: 'habit_id', as: 'logs' });
-  habitLog.belongsTo(habit, {
-    foreignKey: 'habit_id',
-    as: 'habit',
-    targetKey: 'id',
-  });
-};
-
-addRelations(db);
+relations(db);
 
 module.exports = db;
