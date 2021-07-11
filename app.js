@@ -1,14 +1,14 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
-const apiRoutes = require('./router/router');
+const apiRoutes = require("./router/router");
 
-const errorController = require('./controller/errorController');
-const notificationsController = require('./controller/pushNotification');
+const errorController = require("./controller/errorController");
+const notificationsController = require("./controller/pushNotification");
 
 const { sequelize: db } = require("./database");
 const app = express();
@@ -24,19 +24,19 @@ db.authenticate()
     console.log("Error: " + err);
   });
 
-app.use('/api/v1', apiRoutes);
+app.use("/api/v1", apiRoutes);
 
-app.get('/ping', (req, res) => {
-  res.send('pong');
+app.get("/ping", (req, res) => {
+  res.send("pong");
 });
 
-app.get('/', (req, res) => {
-  res.send('Hola Mundo!');
+app.get("/", (req, res) => {
+  res.send("Hola Mundo!");
 });
 
-app.post('/save-subscription', notificationsController.saveSubscription);
+app.post("/save-subscription", notificationsController.saveSubscription);
 
-app.post('/send-notification', notificationsController.sendNotification);
+app.post("/send-notification", notificationsController.sendNotification);
 
 app.get(errorController);
 
