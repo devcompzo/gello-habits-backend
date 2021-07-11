@@ -1,9 +1,5 @@
-const habitLogDAO = require("../repository/habitLogDAO");
+const habitLogDAO = require('../repository/habitLogDAO');
 
-exports.createHabitLog = ({ user, data }) => {
-  return habitLogDAO.createHabitLog({ data });
-};
+exports.createHabitLog = ({ data }) => habitLogDAO.createHabitLog({ data });
 
-exports.fetchHabitLogs = () => {
-  return habitLogDAO.findAll();
-};
+exports.fetchHabitLogs = () => habitLogDAO.findAll();
