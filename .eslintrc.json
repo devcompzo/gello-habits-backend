@@ -11,6 +11,13 @@
         "ecmaVersion": 12
     },
     "rules": {
-        "linebreak-style": ["error"]
-    }
+        "eqeqeq": "error",
+        "no-console": "warn",
+        "linebreak-style": [
+            "error"
+        ]
+    },
+    "ignorePatterns": [
+        "node_modules"
+    ]
 }
