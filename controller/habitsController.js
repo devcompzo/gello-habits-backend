@@ -1,69 +1,55 @@
-const habitsService = require("../service/habitsService");
+const habitsService = require('../service/habitsService');
 const habitLogService = require("../service/habitLogService");
 
 exports.getAllHabits = (req, res) => {
   //Map the user of the auth in the header
-  const habits = habitsService
-    .fetchAllHabits("MockUSer")
+  habitsService.fetchAllHabits()
     .then((data) => {
-      if (data) res.status(200).send(data);
-      else res.status(404);
+      res.status(200).send(data);
+    }).catch((err) => {
+      res.status(err.status || 500).send({ name: err.name, message: err.message });
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send({ message: "Paso un peo" });
-    });
 };
 
 exports.getHabit = (req, res) => {
-  const habits = habitsService
-    .fetchAllHabits("MockUSer")
+  const { id } = req.params
+  habitsService.fetchHabit(id)
     .then((data) => {
-      if (data) res.status(200).send(data);
-      else res.status(404);
+      res.status(200).send(data);
+    }).catch((err) => {
+      res.status(err.status || 500).send({ name: err.name, message: err.message });
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send({ message: "Paso un peo" });
-    });
 };
 
 exports.deleteHabit = (req, res) => {
-  const habits = habitsService
-    .fetchAllHabits("MockUSer")
+  const { id } = req.params
+  habitsService.deleteHabit(id)
     .then(() => {
-      if (data) res.status(200).send(data);
-      else res.status(404);
+      res.status(200).send(null);
+    }).catch((err) => {
+      res.status(err.status || 500).send({ name: err.name, message: err.message });
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send({ message: "Paso un peo" });
-    });
 };
 
 exports.updateHabit = (req, res) => {
-  const habits = habitsService
-    .fetchAllHabits("MockUSer")
+  const { id } = req.params
+  const habitData = req.body
+  habitsService.updateHabit(habitData, id)
     .then((data) => {
-      if (data) res.status(200).send(data);
-      else res.status(404);
+      res.status(200).send(data);
+    }).catch((err) => {
+      res.status(err.status || 500).send({ name: err.name, message: err.message });
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send({ message: "Paso un peo" });
-    });
 };
 
 exports.createHabit = (req, res) => {
-  const habits = habitsService
-    .fetchAllHabits("MockUSer")
+  const habitData = req.body
+  habitsService.createHabit(habitData)
     .then((data) => {
       res.status(201).send(data);
+    }).catch((err) => {
+      res.status(err.status || 500).send({ name: err.name, message: err.message });
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send({ message: "Paso un peo" });
-    });
 };
 
 exports.getAllHabitLogs = (req, res) => {
