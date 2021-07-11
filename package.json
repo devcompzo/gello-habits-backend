@@ -4,6 +4,7 @@
   "description": "Gello Habits Project - Backend Code",
   "main": "app.js",
   "scripts": {
+    "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js",
     "lint:js": "eslint . --ext .js",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "eslint": "^7.29.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.4"
+    "eslint-plugin-import": "^2.23.4",
+    "husky": "^7.0.1"
   }
 }
