@@ -1,6 +1,15 @@
 const Habit = require('../database').habit;
+const { Op } = require('sequelize');
 
 const findAll = () => Habit.findAll();
+
+const findAllAvailableHabits = () => {
+  return Habit.findAll({
+    where: {
+      [Op.and]: [{ disabled: false }, { deleted: false }]
+    }
+  })
+}
 
 const findById = (id) => Habit.findByPk(id);
 
@@ -29,6 +38,7 @@ const updateHabit = (data, id) => {
 
 const habitDAO = {
   findAll,
+  findAllAvailableHabits,
   findById,
   create,
   deleteById,
