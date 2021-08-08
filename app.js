@@ -13,6 +13,8 @@ const notificationsController = require('./controller/pushNotification');
 
 const { sequelize: db } = require('./database');
 
+const scheduler = require('./tasks/scheduler');
+
 const app = express();
 
 app.use(cors());
@@ -42,10 +44,16 @@ app.post('/send-notification', notificationsController.sendNotification);
 
 app.get(errorController);
 
-db.sync()
-  .then(() => {
+async function main() {
+  try {
+    await db.sync();
+    await scheduler.start();
     app.listen(process.env.PORT || 3000, () => {
       console.log('Gello Habits sample endpoint, listening port 3000');
     });
-  })
-  .catch((err) => console.log(`Error: ${err}`));
+  } catch (err) {
+    console.log(`Error: ${err}`);
+  }
+}
+
+main();
