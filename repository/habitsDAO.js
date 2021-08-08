@@ -1,15 +1,13 @@
-const Habit = require('../database').habit;
 const { Op } = require('sequelize');
+const Habit = require('../database').habit;
 
 const findAll = () => Habit.findAll();
 
-const findAllAvailableHabits = () => {
-  return Habit.findAll({
-    where: {
-      [Op.and]: [{ disabled: false }, { deleted: false }]
-    }
-  })
-}
+const findAllAvailableHabits = () => Habit.findAll({
+  where: {
+    [Op.and]: [{ disabled: false }, { deleted: false }],
+  },
+});
 
 const findById = (id) => Habit.findByPk(id);
 
