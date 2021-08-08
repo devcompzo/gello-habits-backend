@@ -10,7 +10,7 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
   port: 5432,
   // host: 'ec2-54-198-252-9.compute-1.amazonaws.com',
   host: 'localhost',
-  logging: true,
+  // logging: true,
 
   // dialectOptions: {
   //   ssl: {
