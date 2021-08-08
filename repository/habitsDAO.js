@@ -21,19 +21,10 @@ const create = (data) => {
 };
 
 const updateHabit = (data, id) => {
-  const updateHabit = {
-    title: data.title,
-    description: data.description,
-    priority: data.priority,
-    initial_date: data.initial_date,
-    interval: data.interval,
-    interval_unit: data.interval_unit,
-    notify_5prev: data.notify_5prev,
-    notify_10prev: data.notify_10prev,
-    notify_15prev: data.notify_15prev,
-    disabled: data.disabled,
+  const obj = {
+    ...data,
   };
-  return Habit.update(updateHabit, { where: { id } });
+  return Habit.update(obj, { where: { id } });
 };
 
 const habitDAO = {
@@ -41,6 +32,7 @@ const habitDAO = {
   findAllAvailableHabits,
   findById,
   create,
+  updateHabit,
   deleteById,
 };
 

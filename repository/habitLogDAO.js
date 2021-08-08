@@ -1,26 +1,24 @@
-const HabitLog = require("../database").habitLog;
+const HabitLog = require('../database').habitLog;
 
 const createHabitLog = ({ data }) => {
-  var datetime = new Date();
+  const datetime = new Date();
 
-  var newLog = {
+  const newLog = {
     achieved: data.achieved,
     habit_habitlog_id: data.habit_habitlog_id,
     createdAt: datetime,
     updatedAt: datetime,
   };
 
-  var newHabitLog = new HabitLog(newLog);
+  const newHabitLog = new HabitLog(newLog);
   return newHabitLog.save();
 };
 
-const findAll = () => {
-  return HabitLog.findAll();
-};
+const findAll = () => HabitLog.findAll();
 
-var habitLogDAO = {
-  findAll: findAll,
-  createHabitLog: createHabitLog,
+const habitLogDAO = {
+  findAll,
+  createHabitLog,
 };
 
 module.exports = habitLogDAO;
