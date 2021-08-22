@@ -7,9 +7,11 @@ const characterRouter = require('./characterRouter');
 const habitsRouter = require('./habitsRouter');
 const userRouter = require('./userRouter');
 
-router.use(accesoryRouter);
-router.use(characterRouter);
-router.use(habitsRouter);
-router.use(userRouter);
+const authorizationMid = require('../middleware/authorizate');
+
+router.use(authorizationMid, userRouter);
+router.use(authorizationMid, accesoryRouter);
+router.use(authorizationMid, characterRouter);
+router.use(authorizationMid, habitsRouter);
 
 module.exports = router;

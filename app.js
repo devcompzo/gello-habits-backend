@@ -8,6 +8,7 @@ const cors = require('cors');
 const datadog = require('./metrics/datadog');
 
 const apiRoutes = require('./router/router');
+const authRoutes = require('./router/authRouter');
 
 const errorController = require('./controller/errorController');
 const notificationsController = require('./controller/pushNotification');
@@ -31,22 +32,23 @@ db.authenticate()
 
 app.use(datadog);
 
-app.use('/api/v1', apiRoutes);
-
 app.get('/ping', (req, res) => {
-  console.log('pong');
   res.status(200).send('pong');
-});
-
-app.get('/', (req, res) => {
-  res.send('Hola Mundo!');
 });
 
 app.post('/save-subscription', notificationsController.saveSubscription);
 
 app.post('/send-notification', notificationsController.sendNotification);
 
+app.use(authRoutes);
+
+app.use('/api/v1', apiRoutes);
+
 app.get(errorController);
+
+app.get('/', (req, res) => {
+  res.send('Hola Mundo!');
+});
 
 async function main() {
   const port = process.env.PORT || 3000;

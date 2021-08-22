@@ -6,7 +6,7 @@ exports.getUserData = (req, res) => {
     .fetchUser({ id })
     .then((data) => {
       if (data) res.status(200).send(data);
-      else res.status(404);
+      else res.status(404).send();
     })
     .catch(() => res.status(500).send({ message: 'Paso un peo' }));
 };
@@ -18,7 +18,7 @@ exports.updateUserData = (req, res) => {
     .updateUser({ id, data })
     .then((result) => {
       if (result) res.status(200).send(result);
-      else res.status(404);
+      else res.status(404).send();
     })
     .catch(() => {
       res.status(500).send({ message: 'Paso un peo' });
