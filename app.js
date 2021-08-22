@@ -2,9 +2,10 @@
 const dotenv = require('dotenv');
 
 dotenv.config();
-
 const express = require('express');
 const cors = require('cors');
+
+const datadog = require('./metrics/datadog');
 
 const apiRoutes = require('./router/router');
 
@@ -13,7 +14,7 @@ const notificationsController = require('./controller/pushNotification');
 
 const { sequelize: db } = require('./database');
 
-const scheduler = require('./tasks/scheduler');
+// const scheduler = require('./tasks/scheduler');
 
 const app = express();
 
@@ -28,10 +29,13 @@ db.authenticate()
     console.log(`Error: ${err}`);
   });
 
+app.use(datadog);
+
 app.use('/api/v1', apiRoutes);
 
 app.get('/ping', (req, res) => {
-  res.send('pong');
+  console.log('pong');
+  res.status(200).send('pong');
 });
 
 app.get('/', (req, res) => {
@@ -45,11 +49,13 @@ app.post('/send-notification', notificationsController.sendNotification);
 app.get(errorController);
 
 async function main() {
+  const port = process.env.PORT || 3000;
   try {
     await db.sync();
-    await scheduler.start();
-    app.listen(process.env.PORT || 3000, () => {
-      console.log('Gello Habits sample endpoint, listening port 3000');
+    //! Se está quedando pegado en esta instruccion
+    // await scheduler.start();
+    app.listen(port, () => {
+      console.log(`Gello Habits sample endpoint, listening port ${port}`);
     });
   } catch (err) {
     console.log(`Error: ${err}`);
