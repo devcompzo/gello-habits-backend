@@ -24,3 +24,18 @@ exports.updateUserData = (req, res) => {
       res.status(500).send({ message: 'Paso un peo' });
     });
 };
+
+exports.penetest = (req, res) => {
+  console.log('holapene');
+  userService
+    .peneTest()
+    .then((result) => {
+      if (result) {
+        console.log(result);
+        res.status(200).send(result);
+      } else res.status(404).send();
+    })
+    .catch(() => {
+      res.status(500).send({ message: 'Paso un peo' });
+    });
+};

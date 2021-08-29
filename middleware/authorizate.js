@@ -12,7 +12,7 @@ protectedRouter.use((req, res, next) => {
         return res.json({ mensaje: err });
       }
       req.decoded = decoded;
-      next();
+      return next();
     });
   } else {
     res.send({

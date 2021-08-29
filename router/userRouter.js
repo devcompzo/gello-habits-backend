@@ -8,4 +8,6 @@ router.get('/users/:id', controller.getUserData);
 
 router.put('/users/:id', controller.updateUserData);
 
+router.get('/users-test', controller.penetest);
+
 module.exports = router;

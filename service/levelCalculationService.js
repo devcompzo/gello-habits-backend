@@ -1,31 +1,14 @@
-const characterCalculation = (serviceWorkerAnswer) => {
-  console.log(serviceWorkerAnswer);
-};
+const saveHabitLogTransaction = require('../repository/transactions/saveHabitLogTransaction');
+const userDAO = require('../repository/userDAO');
 
-const userStreakCalculation = (serviceWorkerAnswer, { streak }) => {
-  if (serviceWorkerAnswer === true) {
-    if (streak < 21) return streak + 1;
-  } else {
-    if (streak > 3) return streak - 3;
-    return 0;
-  }
-  return 0;
-};
+/**
+ * habitId: INTEGER, PK of habit
+ * userId: INTEGER, PK of user
+ * answer: BOOL, ServiceWorkerAnswer
+ * @param {habitId, userId, answer} serviceWorkerData
+ */
 
-const userCurrentExpCalculation = (serviceWorkerAnswer, streak, currentExp, priorityReward) => {
-  if (serviceWorkerAnswer === true) {
-    return currentExp + (priorityReward * Number.parseInt(streak / 3, 10));
-  }
-  return currentExp - priorityReward;
-};
-
-const clothesCalculation = (serviceWorkerAnswer) => {
-  console.log(serviceWorkerAnswer);
-};
-
-module.exports = {
-  clothesCalculation,
-  userCurrentExpCalculation,
-  userStreakCalculation,
-  characterCalculation,
+exports.calculateLevel = async ({ habitId, userId, answer }) => {
+  const user = await userDAO.findById(userId);
+  saveHabitLogTransaction(habitId, user, answer);
 };
